@@ -4,20 +4,20 @@
 
 ## Registers
 
-``` v
+``` 
 reg [7:0] data_flash_reg;
 always @(posedge clk_flash) data_flash_reg <= data_flash;
 ```
 
 ## The FIFO
 
-``` v
+``` 
 fifo myfifo(.data(data_flash_reg), .wrreq(wrreq), .wrclk(clk_flash), .wrfull(wrfull), .wrempty(wrempty), .q(q_fifo), .rdreq(rdreq), .rdclk(clk), .rdempty(rdempty));
 ```
 
 ## Writing to the FIFO
 
-``` v
+``` 
 reg fillfifo;
 always @(posedge clk_flash)
 if(~fillfifo)
@@ -30,7 +30,7 @@ assign wrreq = fillfifo;
 
 ## Reading from the FIFO
 
-``` v
+``` 
 wire TxD_start = ~TxD_busy & ~rdempty;
 assign rdreq = TxD_start;
 
