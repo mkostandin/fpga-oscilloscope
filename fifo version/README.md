@@ -9,7 +9,7 @@ reg [7:0] data_flash_reg;
 always @(posedge clk_flash) data_flash_reg <= data_flash;
 ```
 
-## The FIFO
+## The FIFO(After generating IP with Quartus)
 
 ``` 
 fifo myfifo(.data(data_flash_reg), .wrreq(wrreq), .wrclk(clk_flash), .wrfull(wrfull), .wrempty(wrempty), .q(q_fifo), .rdreq(rdreq), .rdclk(clk), .rdempty(rdempty));
