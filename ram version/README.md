@@ -37,3 +37,10 @@ reg Acquiring1; always @(posedge clk) Acquiring1 <= Acquiring;
 reg Acquiring2; always @(posedge clk) Acquiring2 <= Acquiring1;
 assign AcquisitionStarted = Acquiring2;
 ```
+## Dual-port RAM
+```
+ram512 ram_flash(
+  .data(data_flash_reg), .wraddress(wraddress), .wren(Acquiring), .wrclock(clk_flash),
+  .q(ram_output), .rdaddress(rdaddress), .rden(rden), .rdclock(clk)
+);
+```
