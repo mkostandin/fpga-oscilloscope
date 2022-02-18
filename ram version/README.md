@@ -46,6 +46,11 @@ ram512 ram_flash(
 ```
 #### Write Address
 ```
+reg [8:0] wraddress;
+always @(posedge clk_flash) if(Acquiring) wraddress <= wraddress + 1;
+```
+#### Read Address
+```
 reg [8:0] rdaddress;
 reg Sending;
 wire TxD_busy;
