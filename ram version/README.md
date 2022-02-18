@@ -44,3 +44,19 @@ ram512 ram_flash(
   .q(ram_output), .rdaddress(rdaddress), .rden(rden), .rdclock(clk)
 );
 ```
+#### Write Address
+```
+reg [8:0] rdaddress;
+reg Sending;
+wire TxD_busy;
+
+always @(posedge clk)
+if(~Sending)
+  Sending <= AcquisitionStarted;
+else
+if(~TxD_busy)
+begin
+  rdaddress <= rdaddress + 1;
+  if(&rdaddress) Sending <= 0;
+end
+```
