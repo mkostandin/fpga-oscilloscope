@@ -18,3 +18,8 @@ else
 if(AcquisitionStarted)
   startAcquisition <= 0;
 ```
+#### Synchronizers(Domain Crossing)
+```
+reg startAcquisition1; always @(posedge clk_flash) startAcquisition1 <= startAcquisition;
+reg startAcquisition2; always @(posedge clk_flash) startAcquisition2 <= startAcquisition1;
+```
