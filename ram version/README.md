@@ -65,3 +65,11 @@ begin
   if(&rdaddress) Sending <= 0;
 end
 ```
+#### Send Data to PC
+```
+wire TxD_start = ~TxD_busy & Sending;
+wire rden = TxD_start;
+
+wire [7:0] ram_output;
+async_transmitter async_txd(.clk(clk), .TxD(TxD), .TxD_start(TxD_start), .TxD_busy(TxD_busy), .TxD_data(ram_output));
+```
