@@ -18,8 +18,22 @@ else
 if(AcquisitionStarted)
   startAcquisition <= 0;
 ```
-#### Synchronizers(Domain Crossing)
+#### Synchronizers(Start Acquisition)
 ```
 reg startAcquisition1; always @(posedge clk_flash) startAcquisition1 <= startAcquisition;
 reg startAcquisition2; always @(posedge clk_flash) startAcquisition2 <= startAcquisition1;
+```
+#### Synchronizer(Acquiring)
+```
+reg Acquiring;
+always @(posedge clk_flash)
+if(~Acquiring)
+  Acquiring <= startAcquisition2;  // start acquiring?
+else
+if(&wraddress)  // done acquiring?
+  Acquiring <= 0;
+
+reg Acquiring1; always @(posedge clk) Acquiring1 <= Acquiring;
+reg Acquiring2; always @(posedge clk) Acquiring2 <= Acquiring1;
+assign AcquisitionStarted = Acquiring2;
 ```
