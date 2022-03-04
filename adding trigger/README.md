@@ -27,3 +27,4 @@ With a memory depth of 512 bytes, we first make sure to acquire at least 256 byt
 reg PreTriggerPointReached;
 always @(posedge clk_flash) PreTriggerPointReached <= (samplecount==256);
 ```
+The decision logic deals with all these steps:
