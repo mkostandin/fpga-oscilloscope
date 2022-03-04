@@ -9,3 +9,5 @@ always @(posedge clk_flash) Threshold2 <= Threshold1;
 
 assign Trigger = Threshold1 & ~Threshold2;  // if positive edge, trigger!
 ```
+
+## Mid-Display Trigger
