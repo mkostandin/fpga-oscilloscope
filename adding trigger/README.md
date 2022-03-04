@@ -23,3 +23,7 @@ The implementation is easy. First we have to keep track of how many bytes have b
 reg [8:0] samplecount;
 ```
 With a memory depth of 512 bytes, we first make sure to acquire at least 256 bytes, then stop counting but keep acquiring while waiting for a trigger. Once the trigger comes, we start counting again to acquire 256 more bytes, and stop.
+```
+reg PreTriggerPointReached;
+always @(posedge clk_flash) PreTriggerPointReached <= (samplecount==256);
+```
