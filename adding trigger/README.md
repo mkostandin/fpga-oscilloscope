@@ -63,3 +63,22 @@ reg Acquiring2; always @(posedge clk) Acquiring2 <= Acquiring1;
 assign AcquisitionStarted = Acquiring2;
 ```
 Notice that we took care of remembering where the trigger happened. That's used to determine the beginning of the sample window in the RAM to send to the PC.
+```
+reg [8:0] rdaddress, SendCount;
+reg Sending;
+wire TxD_busy;
+
+always @(posedge clk)
+if(~Sending)
+begin
+  Sending <= AcquisitionStarted;
+  if(AcquisitionStarted) rdaddress <= (wraddress_triggerpoint ^ 9'h100);
+end
+else
+if(~TxD_busy)
+begin
+  rdaddress <= rdaddress + 1;
+  SendCount <= SendCount + 1;
+  if(&SendCount) Sending <= 0;
+end
+```
