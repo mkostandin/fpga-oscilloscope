@@ -82,3 +82,4 @@ begin
   if(&SendCount) Sending <= 0;
 end
 ```
+With this design, we finally get a useful oscilloscope. We just need to customize it now.
