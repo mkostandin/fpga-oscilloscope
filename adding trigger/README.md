@@ -62,3 +62,4 @@ reg Acquiring1; always @(posedge clk) Acquiring1 <= AcquiringAndTriggered;
 reg Acquiring2; always @(posedge clk) Acquiring2 <= Acquiring1;
 assign AcquisitionStarted = Acquiring2;
 ```
+Notice that we took care of remembering where the trigger happened. That's used to determine the beginning of the sample window in the RAM to send to the PC.
